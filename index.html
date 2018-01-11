@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Piano</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    
+    <div class="uppernotes">
+    <div data-key="69" class="upnote">
+      <kbd>E</kbd>
+      <span class="sound"></span>
+    </div>
+    <div data-key="82" class="upnote">
+      <kbd>R</kbd>
+      <span class="sound"></span>
+    </div>
+       <div data-key="" class="empty">
+    </div>
+    <div data-key="89" class="upnote">
+      <kbd>Y</kbd>
+      <span class="sound"></span>
+    </div>
+    <div data-key="85" class="upnote">
+      <kbd>U</kbd>
+      <span class="sound"></span>
+    </div>
+    <div data-key="73" class="upnote">
+      <kbd>I</kbd>
+      <span class="sound"></span>
+    </div>
+
+  </div>
+
+
+<audio data-key="69" src="sounds/dod.mp3"></audio>
+  <audio data-key="82" src="sounds/red.mp3"></audio>
+  <audio data-key="89" src="sounds/fad.mp3"></audio>
+  <audio data-key="85" src="sounds/sold.mp3"></audio>
+  <audio data-key="73" src="sounds/lad.mp3"></audio>
+ 
+    
+    
+    
+  <div class="notes">
+    <div data-key="65" class="note">
+      <kbd>A</kbd>
+      <span class="sound"></span>
+    </div>
+    <div data-key="83" class="note">
+      <kbd>S</kbd>
+      <span class="sound"></span>
+    </div>
+    <div data-key="68" class="note">
+      <kbd>D</kbd>
+      <span class="sound"></span>
+    </div>
+    <div data-key="70" class="note">
+      <kbd>F</kbd>
+      <span class="sound"></span>
+    </div>
+    <div data-key="71" class="note">
+      <kbd>G</kbd>
+      <span class="sound"></span>
+    </div>
+    <div data-key="72" class="note">
+      <kbd>H</kbd>
+      <span class="sound"></span>
+    </div>
+    <div data-key="74" class="note">
+      <kbd>J</kbd>
+      <span class="sound"></span>
+    </div>
+
+  </div>
+
+  <audio data-key="65" src="sounds/do.mp3"></audio>
+  <audio data-key="83" src="sounds/re.mp3"></audio>
+  <audio data-key="68" src="sounds/mi.mp3"></audio>
+  <audio data-key="70" src="sounds/fa.mp3"></audio>
+  <audio data-key="71" src="sounds/sol.mp3"></audio>
+  <audio data-key="72" src="sounds/la.mp3"></audio>
+  <audio data-key="74" src="sounds/si.mp3"></audio>
+
+    
+
+<script>
+  function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+  }
+
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  const notes = Array.from(document.querySelectorAll('.note'));
+  notes.forEach(note => note.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+    
+      const upnotes = Array.from(document.querySelectorAll('.upnote'));
+  upnotes.forEach(upnote => upnote.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+    
+</script>
+
+
+</body>
+</html>
